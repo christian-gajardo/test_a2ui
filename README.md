@@ -1,36 +1,44 @@
-# A2UI Vanilla Base (Camino a Odoo 19)
+# Mini-Proyecto Chatbot Gemini (Arquitectura Odoo-like)
 
-Este proyecto es una base minimalista que utiliza **Python (FastAPI)** y **JavaScript Vanilla** para demostrar una arquitectura alineada con los patrones modernos de **Odoo 19**.
+Este proyecto está estructurado siguiendo los patrones de un módulo de Odoo para facilitar su escalabilidad y futura integración.
 
-## Inicio Rápido
+## Estructura de Archivos
 
-1. **Instalar dependencias**:
+```text
+.
+├── addon_chatbot/              # Carpeta del módulo principal
+│   ├── __init__.py             # Inicializador del módulo
+│   ├── __manifest__.py        # Metadatos del módulo (estilo Odoo)
+│   ├── controllers/            # Controladores de Flask (Rutas)
+│   │   └── main.py
+│   ├── models/                 # Lógica de negocio y clientes API
+│   │   └── gemini_client.py
+│   ├── static/                 # Archivos estáticos
+│   │   └── src/
+│   │       ├── js/
+│   │       │   ├── a2ui/       # <-- AQUÍ añadir componentes de A2UI
+│   │       │   └── chatbot.js
+│   │       └── css/
+│   │           └── style.css
+│   └── views/
+│       └── templates/          # Plantillas HTML
+│           └── index.html
+├── requirements.txt            # Dependencias de Python
+├── run.py                      # Punto de entrada de la aplicación
+└── README.md                   # Esta documentación
+```
+
+## Instalación y Uso
+
+1. Instalar requerimientos:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Ejecutar el Backend**:
+2. Ejecutar la aplicación:
    ```bash
-   python backend/main.py
+   python run.py
    ```
 
-3. **Ejecutar el Frontend**:
-   Simplemente abre `frontend/index.html` en tu navegador.
-
-## Estructura del Proyecto
-
-- `backend/models/`: Lógica de negocio y modelos de datos (imita `models.Model`).
-- `backend/controllers/`: Endpoints JSON-RPC (imita controladores de Odoo).
-- `frontend/static/js/component.js`: Clase base para componentes (imita **Owl Component**).
-- `frontend/static/js/rpc.js`: Utilidad para llamadas al servidor (imita `web.rpc`).
-
-## ¿Por qué esta estructura?
-
-Esta base te permite desarrollar aplicaciones independientes pero con una "mentalidad Odoo". Cuando decidas migrar a Odoo 19:
-- Tus modelos en Python se convertirán en modelos de Odoo casi directamente.
-- Tus componentes de JS ya tendrán la estructura necesaria para ser convertidos a componentes Owl oficiales.
-- La comunicación ya utiliza el estándar JSON-RPC que Odoo requiere.
-
-## Requisitos
-- Python 3.9+
-- Un navegador moderno.
+## Integración con A2UI
+Los componentes de **A2UI** deben añadirse en `addon_chatbot/static/src/js/a2ui/`. Desde allí se pueden escalar los widgets y la interfaz del chatbot de forma modular.
