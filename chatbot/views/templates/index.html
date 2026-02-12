@@ -3,14 +3,44 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Chatbot Gemini - A2UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Chat | A2UI Foundation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='src/css/style.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Chatbot Gemini (A2UI Structure)</h1>
-    <div id="chatbot-container">
-        <!-- Los componentes de A2UI se renderizarán aquí -->
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <h1>Test Chat</h1>
+            </div>
+            <div class="status">
+                <span class="status-dot"></span> Online
+            </div>
+        </header>
+
+        <main class="chat-container" id="chat-messages">
+            <div class="message bot">
+                <div class="message-content">
+                    Hola! ¿En qué puedo ayudarte hoy?
+                </div>
+            </div>
+        </main>
+
+        <footer class="input-area">
+            <div class="input-wrapper">
+                <input type="text" id="user-input" placeholder="Escribe un mensaje..." autocomplete="off">
+                <button id="send-btn" title="Enviar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </footer>
     </div>
     <script src="{{ url_for('static', filename='src/js/chatbot.js') }}"></script>
 </body>

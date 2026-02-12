@@ -1,44 +1,41 @@
-# Mini-Proyecto Chatbot Gemini (Arquitectura Odoo-like)
+# Mini-Proyecto Chatbot Gemini (A2UI Foundation)
 
-Este proyecto está estructurado siguiendo los patrones de un módulo de Odoo para facilitar su escalabilidad y futura integración.
+Aplicación de chat moderna y funcional construida con **Flask**, **JavaScript** y la **API de Gemini**.
 
-## Estructura de Archivos
+## Estructura del Proyecto
 
 ```text
 .
-├── addon_chatbot/              # Carpeta del módulo principal
-│   ├── __init__.py             # Inicializador del módulo
-│   ├── __manifest__.py        # Metadatos del módulo (estilo Odoo)
-│   ├── controllers/            # Controladores de Flask (Rutas)
-│   │   └── main.py
-│   ├── models/                 # Lógica de negocio y clientes API
-│   │   └── gemini_client.py
-│   ├── static/                 # Archivos estáticos
-│   │   └── src/
-│   │       ├── js/
-│   │       │   ├── a2ui/       # <-- AQUÍ añadir componentes de A2UI
-│   │       │   └── chatbot.js
-│   │       └── css/
-│   │           └── style.css
-│   └── views/
-│       └── templates/          # Plantillas HTML
-│           └── index.html
-├── requirements.txt            # Dependencias de Python
-├── run.py                      # Punto de entrada de la aplicación
-└── README.md                   # Esta documentación
+├── chatbot/                    # Módulo de la aplicación
+│   ├── controllers/            # Rutas (Flask Blueprints)
+│   ├── models/                 # Lógica de GeminiClient
+│   ├── static/                 # CSS y JS premium
+│   └── views/templates/        # Interfaz de usuario (HTML)
+├── .env                        # Configuración de variables de entorno
+├── run.py                      # Servidor principal
+└── requirements.txt            # Dependencias
 ```
 
-## Instalación y Uso
+## Configuración
 
-1. Instalar requerimientos:
+1. Crea un archivo `.env` en la raíz (si no existe) y añade tu API Key de Gemini:
+   ```env
+   GEMINI_API_KEY=tu_api_key_aqui
+   ```
+
+2. Instala las dependencias:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. Ejecutar la aplicación:
-   ```bash
-   python run.py
-   ```
+## Ejecución
 
-## Integración con A2UI
-Los componentes de **A2UI** deben añadirse en `addon_chatbot/static/src/js/a2ui/`. Desde allí se pueden escalar los widgets y la interfaz del chatbot de forma modular.
+Inicia el servidor:
+```bash
+python run.py
+```
+Abre tu navegador en `http://127.0.0.1:5000`.
+
+## Escalabilidad con A2UI
+La arquitectura modular permite añadir nuevos componentes en `chatbot/static/src/js/a2ui/`. El frontend ya utiliza variables CSS y una estructura limpia preparada para componentes reutilizables.
+
