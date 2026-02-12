@@ -3,7 +3,7 @@
     --primary-dark: #2563eb;
     --bg-app: #0f172a;
     --bg-chat: #1e293b;
-    --text-main: #f8fafc;
+    --text-main: #ffffff;
     --text-muted: #94a3b8;
     --msg-user: #3b82f6;
     --msg-bot: #334155;
@@ -186,7 +186,60 @@ button:hover {
     transform: scale(1.05);
 }
 
-button svg {
-    width: 20px;
-    height: 20px;
+/* A2UI Form Styles */
+.a2ui-form {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+}
+
+.a2ui-form h3 {
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.form-field {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    padding: 0.75rem;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-field select option {
+    background-color: var(--bg-chat);
+    color: var(--text-main);
+}
+
+.form-submit {
+    width: 100%;
+    margin-top: 0.5rem;
 }
