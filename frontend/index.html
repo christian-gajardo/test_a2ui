@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2UI Vanilla Base</title>
+    <style>
+        :root {
+            --primary: #714B67;
+            /* Odoo Purple */
+            --bg: #f8f9fa;
+            --text: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .app-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .status {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="app-container">
+        <!-- Los componentes se renderizarán aquí -->
+    </div>
+
+    <script type="module">
+        import { Component } from './static/js/component.js';
+        import { rpc } from './static/js/rpc.js';
+
+        class App extends Component {
+            setup() {
+                const message = this.state.message || "Bienvenido a A2UI Vanilla";
+                return `
+                    <h1>A2UI Vanilla</h1>
+                    <p>Esta es una estructura base que imita los patrones de Odoo 19.</p>
+                    <div class="status">${message}</div>
+                    <button id="send-rpc">Probar JSON-RPC</button>
+                `;
+            }
+
+            mounted() {
+                const btn = document.getElementById('send-rpc');
+                if (btn) {
+                    btn.onclick = async () => {
+                        this.state.message = "Enviando RPC...";
+                        try {
+                            const result = await rpc('http://localhost:8000/jsonrpc', {
+                                model: 'test.ping',
+                                method: 'execute',
+                                args: [],
+                                kwargs: {}
+                            });
+                            this.state.message = result.message;
+                        } catch (e) {
+                            this.state.message = "Error de RPC: ¿Está el backend en ejecución?";
+                        }
+                    };
+                }
+            }
+        }
+
+        const appRoot = document.getElementById('app');
+        const app = new App(appRoot);
+        app.render();
+    </script>
+</body>
+
+</html>
