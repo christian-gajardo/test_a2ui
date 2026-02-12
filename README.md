@@ -60,5 +60,33 @@ El sistema permite la generación de componentes interactivos mediante el proces
 - **Procedimiento**: Al solicitar un formulario a través del chat, la IA generará un bloque JSON.
 - **Procesamiento**: El motor de renderizado detecta el bloque y construye el componente HTML correspondiente de forma dinámica en la interfaz.
 
-## Documentación Técnica
-El código fuente incluye comentarios técnicos detallados en español para asegurar la comprensión de cada módulo, incluyendo la gestión de peticiones en `gemini_client.py` y el motor de renderizado en `form_renderer.js`.
+## 🛠️ Guía de Extensión: Añadir Componentes A2UI
+
+Para expandir la librería de componentes A2UI y permitir que la IA los genere, siga estos pasos:
+
+### 1. Definir el Componente Frontend
+Cree un nuevo archivo JavaScript en `chatbot/static/src/js/a2ui/`.
+- Use una clase con un método estático `render`.
+- Asegúrese de que devuelva un elemento del DOM.
+- Ejemplo: `chatbot/static/src/js/a2ui/nuevo_componente.js`.
+
+### 2. Actualizar las Instrucciones del Sistema (Backend)
+Modifique el archivo `chatbot/models/gemini_client.py`.
+- Actualice la variable `system_instruction`.
+- Defina la estructura JSON que la IA debe generar para su nuevo componente.
+- Ejemplo: ```json:mi_componente { "dato": "valor" } ```.
+
+### 3. Integrar en el Procesador de Mensajes
+Modifique `chatbot/static/src/js/chatbot.js`.
+- Importe su nuevo componente al inicio del archivo.
+- Añada una expresión regular y lógica de detección en la función `addMessage` para capturar el nuevo bloque JSON (ej. `json:mi_componente`).
+- Instancie y añada el componente al contenedor de mensajes.
+
+### 4. Estilos Visuales
+Añada las reglas CSS necesarias en `chatbot/static/src/css/style.css`.
+- Asegúrese de mantener la coherencia con las variables de color globales (`--primary`, `--bg-chat`, etc.).
+- Use clases específicas para evitar colisiones de estilo.
+
+### 5. Documentar y Probar
+- Actualice el `README.md` con el nuevo componente.
+- Reinicie el servidor y solicite a la IA que genere el componente para validar la integración.
